@@ -1,0 +1,54 @@
+name: PHP Composer
+
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_DATABASE: magento_integration_tests
+          MYSQL_ROOT_PASSWORD: 123123q
+        ports:
+          - 3306:3306
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.3'
+        extensions: bcmath, ctype, curl, dom, gd, hash, iconv, intl, mbstring, openssl, pdo_mysql, simplexml, soap, xsl, zip, lib-libxml
+        coverage: xdebug
+
+    - name: Setup RabbitMQ
+      uses: getong/rabbitmq-action@v1.2
+      with:
+        rabbitmq version: '3.8.2-management-alpine'
+        host port: 5672
+        rabbitmq user: 'guest'
+        rabbitmq password: 'guest'
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: unit tests
+      run: |
+        cp .github/workflows/config/unit/* dev/tests/unit/
+        cd dev/tests/unit
+        ../../../vendor/bin/phpunit -c phpunit.xml.ci
+
+    - name: integration tests
+      run: |
+        cp -r .github/workflows/config/integration/* dev/tests/integration/
+        cd dev/tests/integration
+        ../../../vendor/bin/phpunit -c phpunit.xml.ci
