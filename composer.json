@@ -1,0 +1,23 @@
+{
+  "name": "skywire/m2-actions-workflow",
+  "description": "Github actions workflow for Magento 2 projects",
+  "type": "library",
+  "require": {
+    "skywire/file-copy-plugin": "^1.1"
+  },
+  "extra": {
+    "copy-file": {
+      "vendor/skywire/m2-actions-workflow/.github/workflows/php.yml": ".github/workflows/php.yml!",
+      "vendor/skywire/m2-actions-workflow/config/integration/etc/install-config-mysql.php": ".github/workflows/config/integration/etc/install-config-mysql.php!",
+      "vendor/skywire/m2-actions-workflow/config/integration/phpunit.xml": ".github/workflows/config/integration/phpunit.xml!",
+      "vendor/skywire/m2-actions-workflow/config/unit/phpunit.xml": ".github/workflows/config/unit/phpunit.xml!"
+    }
+  },
+  "repositories": {
+    "private-packagist": {
+      "type": "composer",
+      "url": "https://repo.packagist.com/skywire/"
+    },
+    "packagist.org": false
+  }
+}
