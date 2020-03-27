@@ -19,7 +19,7 @@ Files can be customised for your project, composer should not overwrite them whe
 ~~~
 <directory suffix=".php">../../../app/code/Skywire</directory>
 ~~~
-- Remove .travis.yml is exists
+- Remove .travis.yml if exists
 - Update github configuration as required to not allow merge with this passing
 
 ## Usage
