@@ -1,0 +1,50 @@
+name: PHP Static Analysis
+
+on:
+    push:
+        branches: [ develop ]
+    pull_request:
+        branches: [ master, develop ]
+
+jobs:
+    phpcs:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Get Composer Cache Directory
+              id: composer-cache
+              run: |
+                  echo "::set-output name=dir::$(composer config cache-files-dir)"
+            - uses: actions/cache@v1
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-composer-
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '7.3'
+                  extensions: bcmath, ctype, curl, dom, gd, hash, iconv, intl, mbstring, openssl, pdo_mysql, simplexml, soap, xsl, zip, lib-libxml
+                  coverage: xdebug
+
+            - name: Validate composer.json and composer.lock
+              run: composer validate
+
+            - name: Install dependencies
+              run: composer install --prefer-dist --no-progress --no-suggest
+
+            - name: Run CodeSniffer with Magneto2 standard
+              run: |
+                  vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
+                  vendor/bin/phpcs --standard=vendor/magento/magento-coding-standard/Magento2 app/code/Skywire app/code/[ClientNamespace] --severity=7 --report=csv --report-file=phpcs-report.csv
+
+            - name: Upload report
+              if: always()
+              uses: actions/upload-artifact@v1
+              with:
+                  name: phpcs-report
+                  path: phpcs-report.csv
+

@@ -11,6 +11,9 @@ Files can be customised for your project, composer should not overwrite them whe
 ## Customisation
 
 - Update `.github/workflows/php.yml` to the version of PHP required
+
+- Update `.github/workflows/static.yml` and replace `app/code/[ClientNamespace]` with your client namespace, e.g app/code/FL
+
 - Update `.github/workflows/config/integration/phpunit.xml` and `.github/workflows/config/unit/phpunit.xml` with directories to test:
 ~~~
 <directory suffix="Test.php">../../../app/code/Skywire/*/Test/Integration</directory>
