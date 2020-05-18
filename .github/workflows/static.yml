@@ -36,10 +36,17 @@ jobs:
             - name: Install dependencies
               run: composer install --prefer-dist --no-progress --no-suggest
 
-            - name: Run CodeSniffer with Magneto2 standard
+            - name: Install Skywire coding standard
               run: |
-                  vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
-                  vendor/bin/phpcs --standard=vendor/magento/magento-coding-standard/Magento2 app/code/Skywire app/code/[ClientNamespace] --severity=7 --report=csv --report-file=phpcs-report.csv
+                git clone https://github.com/Skywire/skywire-coding-standard.git
+                cd skywire-coding-standard
+                composer install
+                cd ../
+
+            - name: Run CodeSniffer with Skywire standard
+              run: |
+                  ./skywire-coding-standard/vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
+                  ./skywire-coding-standard/vendor/bin/phpcs --standard=Skywire app/code/Skywire app/code/[ClientNamespace] --severity=7 --report=csv --report-file=phpcs-report.csv
 
             - name: Upload report
               if: always()
