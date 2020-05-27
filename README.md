@@ -25,6 +25,15 @@ Files can be customised for your project, composer should not overwrite them whe
 - Remove .travis.yml if exists
 - Update github configuration as required to not allow mergeing without this passing
 
-## Usage
+### Capistrano
 
-Contains unit and integration test runners
+Configure the following secrets
+
+* DESTINATION_HOSTNAME = The hostname or IP to deploy to
+* CAPISTRANO_HOST_ALIAS = The host alias used in capistrano
+* DESTINATION_HOST_PRIVATE_KEY = The SSH private key to connect to the host
+* DESTINATION_HOST_KEY = The host key of the server to deploy to
+
+### OpenVPN
+
+If your destination server requires OpenVPN you can will need to place an `openvpn.conf` configuration file and any certificates into `.github/workflows/config/openvpn`
