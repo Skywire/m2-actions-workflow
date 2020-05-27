@@ -27,11 +27,13 @@ jobs:
             -   name: Check Connect VPN
                 run: ping -c 2 ${{ secrets.DESTINATION_HOSTNAME }}
 
+            -   name: Set known hosts
+                run: ssh-keyscan -H -t ssh-rsa ${{ secrets.DESTINATION_HOSTNAME }} >> ~/.ssh/known_hosts
+
             -   name: Install SSH key
                 uses: shimataro/ssh-key-action@v2
                 with:
                     key: ${{ secrets.DESTINATION_HOST_PRIVATE_KEY }}
-                    known_hosts: ${{ secrets.DESTINATION_HOST_KEY }}
 
             -   name: Run capistrano deploy for S5
                 run: |
