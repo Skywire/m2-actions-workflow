@@ -33,7 +33,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.3'
-          extensions: bcmath, ctype, curl, dom, gd, hash, iconv, intl, mbstring, openssl, pdo_mysql, simplexml, soap, xsl, zip, lib-libxml
+          extensions: bcmath, ctype, curl, dom, gd, hash, iconv, intl, mbstring, openssl, pdo_mysql, simplexml, soap, xsl, zip, libxml
           coverage: xdebug
 
       - name: Setup RabbitMQ
