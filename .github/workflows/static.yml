@@ -46,7 +46,7 @@ jobs:
             - name: Run CodeSniffer with Skywire standard
               run: |
                   ./skywire-coding-standard/vendor/bin/phpcs --config-set ignore_warnings_on_exit 1
-                  ./skywire-coding-standard/vendor/bin/phpcs --standard=Skywire app/code/Skywire app/code/[ClientNamespace] --severity=7 --report=csv --report-file=phpcs-report.csv
+                  ./skywire-coding-standard/vendor/bin/phpcs --standard=Skywire app/code/Skywire --basepath=$GITHUB_WORKSPACE app/code/[ClientNamespace] --severity=7 --report=csv --report-file=phpcs-report.csv
 
             - name: Upload report
               if: always()
