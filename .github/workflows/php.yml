@@ -17,23 +17,46 @@ jobs:
           MYSQL_ROOT_PASSWORD: 123123q
         ports:
           - 3306:3306
+
+    env:
+      extensions: bcmath, ctype, curl, dom, gd, hash, iconv, intl, mbstring, openssl, pdo_mysql, simplexml, soap, xsl, zip, libxml
+      key: php-cache-v1 # can be any string, change to clear the extension cache.
+      php-version: '7.3'
+
     steps:
       - uses: actions/checkout@v2
 
-      - name: Get Composer Cache Directory
+      - name: Setup Composer Cache Directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-      - uses: actions/cache@v1
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v1
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
+      - name: Setup PHP cache environment
+        id: extcache
+        uses: shivammathur/cache-extensions@v1
+        with:
+          php-version: ${{ env.php-version }}
+          extensions: ${{ env.extensions }}
+          key: ${{ env.key }}
+
+      - name: Cache PHP extensions
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.extcache.outputs.dir }}
+          key: ${{ steps.extcache.outputs.key }}
+          restore-keys: ${{ steps.extcache.outputs.key }}
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.3'
-          extensions: bcmath, ctype, curl, dom, gd, hash, iconv, intl, mbstring, openssl, pdo_mysql, simplexml, soap, xsl, zip, libxml
+          php-version: ${{ env.php-version }}
+          extensions: ${{ env.extensions }}
           coverage: xdebug
 
       - name: Setup RabbitMQ
