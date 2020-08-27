@@ -36,3 +36,15 @@ Configure the following secrets
 ### OpenVPN
 
 If your destination server requires OpenVPN you can will need to place an `openvpn.conf` configuration file and any certificates into `.github/workflows/config/openvpn`
+
+### Hosts
+
+To add a hosts file entry use 
+```yaml
+jobs:
+  job_name:
+    steps:
+      - name: set /etc/hosts
+        run: |
+          echo 'localhost docker.example.com' | sudo tee -a /etc/hosts
+```

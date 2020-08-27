@@ -1,0 +1,32 @@
+name: Magento 2 Tests
+
+# TODO Add your branches to enable cypress
+#on:
+#    pull_request:
+#        branches: [  ]
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # TODO Capistrano deployment to UAT instance
+
+      - name: run cypress.io
+        run: |
+          cd dev/tests/m2-cypress-suite
+          npm install
+          npm run test
+
+      - name: Upload cypress screenshots
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: screenshots
+          path: /home/runner/work/magento24-sandbox/magento24-sandbox/dev/tests/m2-cypress-suite/cypress/screenshots
+      - name: Upload cypress videos
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: videos
+          path: /home/runner/work/magento24-sandbox/magento24-sandbox/dev/tests/m2-cypress-suite/cypress/videos
