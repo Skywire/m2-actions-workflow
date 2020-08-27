@@ -1,8 +1,9 @@
 name: Capistrano
 
+# TODO Add your branches to enable capistrano
 on:
     push:
-        branches: [actions-cap]
+        branches: []
 jobs:
     capistrano:
         runs-on: ubuntu-latest
