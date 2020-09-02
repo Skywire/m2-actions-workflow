@@ -1,9 +1,11 @@
 name: Magento 2 Tests
 
-# TODO Add your branches to enable cypress
+# TODO Enable the on branches
 #on:
-#    pull_request:
-#        branches: [  ]
+#  push:
+#    branches: [  ]
+#  pull_request:
+#    branches: [  ]
 jobs:
   run_tests:
     runs-on: ubuntu-latest

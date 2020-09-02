@@ -1,9 +1,11 @@
 name: Capistrano
 
-# TODO Add your branches to enable capistrano
-on:
-    push:
-        branches: []
+# TODO Enable the on branches
+#on:
+#  push:
+#    branches: [  ]
+#  pull_request:
+#    branches: [  ]
 jobs:
     capistrano:
         runs-on: ubuntu-latest
@@ -15,7 +17,7 @@ jobs:
 
             -   uses: actions/setup-ruby@v1
                 with:
-                    ruby-version: 2.6.x
+                    ruby-version: 2.7
             -   name: Run ruby bundle
                 run: |
                     gem install bundler
@@ -28,18 +30,14 @@ jobs:
             -   name: Check Connect VPN
                 run: ping -c 2 ${{ secrets.DESTINATION_HOSTNAME }}
 
-            -   name: Set known hosts
-                run: ssh-keyscan -H -t ssh-rsa ${{ secrets.DESTINATION_HOSTNAME }} >> ~/.ssh/known_hosts
-
             -   name: Install SSH key
                 uses: shimataro/ssh-key-action@v2
                 with:
                     key: ${{ secrets.DESTINATION_HOST_PRIVATE_KEY }}
+                    known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
-            -   name: Run capistrano deploy for S5
-                run: |
-                    cd tools/cap
-                    cap s5-actions deploy
+            -   name: Run capistrano deployment to UAT
+                run: cap uat deploy
 
             -   name: kill vpn
                 if: always()
