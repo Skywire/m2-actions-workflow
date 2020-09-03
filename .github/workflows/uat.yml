@@ -1,0 +1,66 @@
+name: Capistrano
+
+on:
+    push:
+        branches: [uat]
+jobs:
+    capistrano:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v1
+
+            # -- Capistrano -- #
+            -   name: Setup hosts
+                run: sudo echo "${{ secrets.DESTINATION_HOSTNAME }}  ${{ secrets.CAPISTRANO_HOST_ALIAS }}" | sudo tee -a /etc/hosts
+
+            -   uses: actions/setup-ruby@v1
+                with:
+                    ruby-version: 2.7
+            -   name: Run ruby bundle
+                run: |
+                    gem install bundler
+                    bundle install
+
+            -   name: Install Open VPN
+                run: sudo apt-get install openvpn
+            -   name: Connect VPN
+                run: sudo openvpn --config .github/workflows/config/openvpn/openvpn.conf &
+            -   name: Check Connect VPN
+                run: ping -c 2 ${{ secrets.DESTINATION_HOSTNAME }}
+
+            -   name: Install SSH key
+                uses: shimataro/ssh-key-action@v2
+                with:
+                    key: ${{ secrets.DESTINATION_HOST_PRIVATE_KEY }}
+                    known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+            -   name: Run capistrano deployment to UAT
+                run: |
+                    cap uat lock:release
+                    cap uat deploy
+
+                # -- Cypress Tests -- #
+            -   name: Install Cypress and run tests
+                uses: cypress-io/github-action@v1
+                with:
+                    working-directory: dev/tests/m2-cypress-suite
+                    browser: chrome
+                    headless: true
+
+            -   name: kill vpn
+                if: always()
+                run: sudo killall openvpn
+
+            -   name: Upload cypress screenshots
+                uses: actions/upload-artifact@v2
+                if: always()
+                with:
+                    name: screenshots
+                    path: /home/runner/work/magento24-sandbox/magento24-sandbox/dev/tests/m2-cypress-suite/cypress/screenshots
+
+            -   name: Upload cypress videos
+                uses: actions/upload-artifact@v2
+                if: always()
+                with:
+                    name: videos
+                    path: /home/runner/work/magento24-sandbox/magento24-sandbox/dev/tests/m2-cypress-suite/cypress/videos

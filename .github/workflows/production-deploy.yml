@@ -7,7 +7,7 @@ name: Capistrano
 #  pull_request:
 #    branches: [  ]
 jobs:
-    capistrano:
+    production_deploy:
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v1

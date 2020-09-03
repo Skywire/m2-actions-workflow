@@ -32,6 +32,7 @@ Configure the following secrets
 * DESTINATION_HOSTNAME = The hostname or IP to deploy to
 * CAPISTRANO_HOST_ALIAS = The host alias used in capistrano
 * DESTINATION_HOST_PRIVATE_KEY = The SSH private key to connect to the host
+* KNOWN_HOSTS = The signature of the destination host taken from `ssh-keyscan -H [hostname]`
 
 ### OpenVPN
 

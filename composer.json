@@ -10,7 +10,8 @@
     "copy-file": {
       "vendor/skywire/m2-actions-workflow/.github/workflows/php.yml": ".github/workflows/php.yml!",
       "vendor/skywire/m2-actions-workflow/.github/workflows/static.yml": ".github/workflows/static.yml!",
-      "vendor/skywire/m2-actions-workflow/.github/workflows/capistrano.yml": ".github/workflows/capistrano.yml!",
+      "vendor/skywire/m2-actions-workflow/.github/workflows/production-deploy.yml": ".github/workflows/production-deploy.yml!",
+      "vendor/skywire/m2-actions-workflow/.github/workflows/uat.yml": ".github/workflows/uat.yml!",
       "vendor/skywire/m2-actions-workflow/config/integration/etc/install-config-mysql.php": ".github/workflows/config/integration/etc/install-config-mysql.php!",
       "vendor/skywire/m2-actions-workflow/config/integration/phpunit.xml": ".github/workflows/config/integration/phpunit.xml!",
       "vendor/skywire/m2-actions-workflow/config/unit/phpunit.xml": ".github/workflows/config/unit/phpunit.xml!"
