@@ -43,7 +43,6 @@ jobs:
             -   name: Install Cypress and run tests
                 uses: cypress-io/github-action@v1
                 with:
-                    working-directory: dev/tests/m2-cypress-suite
                     browser: chrome
                     headless: true
 
