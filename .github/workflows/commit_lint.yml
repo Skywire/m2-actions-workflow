@@ -1,0 +1,10 @@
+name: Lint pull request commits
+on: pull_request
+jobs:
+  commit_lint:
+    runs-on: ubuntu-latest
+    steps:
+      -   name: Lint PR commit messages
+          uses: skywire/actions-conventional-changelog-lint@1.0.0
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
