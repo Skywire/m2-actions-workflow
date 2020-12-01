@@ -2,11 +2,27 @@
 
 ## Installation
 
-`composer require skywire/m2-actions-workflow`
+Clone this repo `git@github.com:Skywire/m2-actions-workflow.git`
 
-Commit new files to git.
+Copy the workflows you want to use into your project's `.github/worksflows/` directory
 
-Files can be customised for your project, composer should not overwrite them when you run an install or update
+
+## Available Workflows
+
+### Standard
+
+These should be used on all projects
+
+* commit_lint - lint commit messages against conventional changelog standard
+* php - Run PHP test suites
+* static - Run static analysis (PHPCS)
+
+### Optional
+
+These are optional or experimental workflows and should be added only as required
+
+* uat - Deploy to UAT via capistrano and run cypress test suite
+* production-deploy - Deploy to production via capistrano
 
 ## Customisation
 
