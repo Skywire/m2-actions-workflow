@@ -1,11 +1,6 @@
 name: PHP Static Analysis
 
-# TODO Enable the on branches
-#on:
-#  push:
-#    branches: [  ]
-#  pull_request:
-#    branches: [  ]
+on: pull_request
 
 jobs:
   phpcs:
@@ -18,19 +13,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Setup Composer Cache Directory
-        id: composer-cache
-        run: |
-          echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v1
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
 
       - name: Setup PHP cache environment
         id: extcache
@@ -54,12 +36,6 @@ jobs:
           extensions: ${{ env.extensions }}
           coverage: xdebug
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
-
       - name: Install Skywire coding standard
         run: |
           git clone https://github.com/Skywire/skywire-coding-standard.git
@@ -78,4 +54,3 @@ jobs:
         with:
           name: phpcs-report
           path: phpcs-report.csv
-
