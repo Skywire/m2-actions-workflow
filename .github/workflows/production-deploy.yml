@@ -25,6 +25,10 @@ jobs:
 
             -   name: Install Open VPN
                 run: sudo apt-get install openvpn
+            -   name: Decode certificate
+                run: |
+                  echo "${{ secrets.OPENVPN_CERTIFICATE }}" > .enc_cert
+                  base64 -d .enc_cert > .github/workflows/config/openvpn/openvpn.p12
             -   name: Connect VPN
                 run: sudo openvpn --config .github/workflows/config/openvpn/openvpn.conf &
             -   name: Check Connect VPN

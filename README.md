@@ -49,10 +49,13 @@ Configure the following secrets
 * CAPISTRANO_HOST_ALIAS = The host alias used in capistrano
 * DESTINATION_HOST_PRIVATE_KEY = The SSH private key to connect to the host
 * KNOWN_HOSTS = The signature of the destination host taken from `ssh-keyscan -H [hostname]`
+* OPENVPN_CERTIFICATE base64 encoded p12 certificate file
 
 ### OpenVPN
 
 If your destination server requires OpenVPN you can will need to place an `openvpn.conf` configuration file and any certificates into `.github/workflows/config/openvpn`
+
+To base64 encode the certificate use `base64 <certificate_name>.p12`
 
 ### Hosts
 
