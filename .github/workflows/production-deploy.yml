@@ -10,7 +10,7 @@ jobs:
     production_deploy:
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v1
+            -   uses: actions/checkout@v3
 
             -   name: Setup hosts
                 run: sudo echo "${{ secrets.DESTINATION_HOSTNAME }}  ${{ secrets.CAPISTRANO_HOST_ALIAS }}" | sudo tee -a /etc/hosts
