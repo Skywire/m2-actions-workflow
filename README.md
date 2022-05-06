@@ -39,16 +39,17 @@ These are optional or experimental workflows and should be added only as require
 <directory suffix=".php">../../../app/code/Skywire</directory>
 ~~~
 - Remove .travis.yml if exists
-- Update github configuration as required to not allow mergeing without this passing
+- Update github configuration as required to not allow merging without this passing
 
 ### Capistrano
 
 Configure the following secrets
 
 * DESTINATION_HOSTNAME = The hostname or IP to deploy to
-* CAPISTRANO_HOST_ALIAS = The host alias used in capistrano
+* DEP_HOST_ALIAS = The host alias used in deployer
 * DESTINATION_HOST_PRIVATE_KEY = The SSH private key to connect to the host
 * KNOWN_HOSTS = The signature of the destination host taken from `ssh-keyscan -H [hostname]`
+* SSH_CONFIG_FILE = The contents of the ~/.ssh/config file (if any)
 * OPENVPN_CERTIFICATE base64 encoded p12 certificate file
 
 ### OpenVPN
