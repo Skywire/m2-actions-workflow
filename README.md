@@ -54,9 +54,16 @@ Configure the following secrets
 
 ### OpenVPN
 
-If your destination server requires OpenVPN you can will need to place an `openvpn.conf` configuration file and any certificates into `.github/workflows/config/openvpn`
+If your destination server requires OpenVPN you will need to place an `openvpn.conf` configuration file and any certificates into `.github/workflows/config/openvpn`
 
 To base64 encode the certificate use `base64 <certificate_name>.p12`
+
+e.g
+`base64 .github/workflows/config/openvpn/*.p12`
+
+Then copy this value into your OPENVPN_CERTIFICATE secret and delte all p12 files. Do not commit these to github
+
+Edit the openvpn.conf file and replace the `pkcs12` value with `.github/workflows/config/openvpn/openvpn.p12`
 
 ### Hosts
 
@@ -73,6 +80,7 @@ jobs:
 ### Testproject.io
 
 To run testproject tests add the testpoject job to your production-deploy.yaml
+
 ```
 on:
     ...
@@ -84,7 +92,7 @@ jobs
     secrets: inherit
 ```
 
-Add 2 additional secrets
+Add testproject secrets
 
 * TP_API_KEY = Your testproject.io API key
 * TP_JOB_ID = The job you want to run (you can get this ID from the copy ID link in testproject itself)
