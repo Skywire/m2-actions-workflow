@@ -47,10 +47,17 @@ Configure the following secrets
 
 * DESTINATION_HOSTNAME = The hostname or IP to deploy to
 * DEP_HOST_ALIAS = The host alias used in deployer
-* DESTINATION_HOST_PRIVATE_KEY = The SSH private key to connect to the host
+* DESTINATION_HOST_PRIVATE_KEY = The SSH private key to connect to the host, ensure the public key has been added to ~/.ssh/authorized_keys
 * KNOWN_HOSTS = The signature of the destination host taken from `ssh-keyscan -H [hostname]`
 * SSH_CONFIG_FILE = The contents of the ~/.ssh/config file (if any)
 * OPENVPN_CERTIFICATE base64 encoded p12 certificate file
+
+Example SSH_CONFIG_FILE
+```
+Host mage.hostname
+    HostName acc.magestack.com
+    User www-data
+```
 
 ### OpenVPN
 

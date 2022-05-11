@@ -50,10 +50,8 @@ jobs:
               with:
                   private-key: ${{ secrets.DESTINATION_HOST_PRIVATE_KEY }}
                   dep: deploy prod
-                  known-hosts: |
-                      ${{ secrets.KNOWN_HOSTS }}
-                  ssh-config: |
-                      ${{ secrets.SSH_CONFIG_FILE }}
+                  known-hosts: ${{ secrets.KNOWN_HOSTS }}
+                  ssh-config: ${{ secrets.SSH_CONFIG_FILE }}
 
             - name: kill vpn
               if: always()
