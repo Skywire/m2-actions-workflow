@@ -41,7 +41,7 @@ These are optional or experimental workflows and should be added only as require
 - Remove .travis.yml if exists
 - Update github configuration as required to not allow merging without this passing
 
-### Capistrano
+### Deployment
 
 Configure the following secrets
 
