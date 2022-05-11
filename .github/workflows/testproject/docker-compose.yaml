@@ -1,0 +1,29 @@
+version: "3.1"
+services:
+  testproject-agent:
+    image: testproject/agent:latest
+    container_name: testproject-agent
+    depends_on:
+      - chrome
+      - firefox
+      - edge
+    environment:
+      TP_AGENT_ALIAS: "Persistent Docker Agent"
+      TP_API_KEY: "PKXIDvjUvyO229J5O2zwsgVUmAFkGSUlSonLA9YXEjE1"
+      CHROME: "chrome:4444"
+      FIREFOX: "firefox:4444"
+      EDGE: "edge:4444"
+    ports:
+      - "8888:8589"
+  chrome:
+    image: selenium/standalone-chrome
+    volumes:
+      - /dev/shm:/dev/shm
+  firefox:
+    image: selenium/standalone-firefox
+    volumes:
+      - /dev/shm:/dev/shm
+  edge:
+    image: selenium/standalone-edge
+    volumes:
+      - /dev/shm:/dev/shm

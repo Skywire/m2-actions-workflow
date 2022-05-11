@@ -1,0 +1,16 @@
+# GitHub Action for Symfony with MySQL
+name: testproject
+on:
+    workflow_call:
+jobs:
+    run_tests:
+        name: run_tests
+        runs-on: ubuntu-latest
+        env:
+            TP_API_KEY: ${{ secrets.TP_API_KEY }}
+            TP_JOB_ID: ${{ secrets.TP_JOB_ID }}
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v2
+            -   name: Run Tests
+                run: docker-compose -f .github/workflows/testproject/docker-compose.yaml up --abort-on-container-exit

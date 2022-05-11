@@ -69,3 +69,22 @@ jobs:
         run: |
           echo 'localhost docker.example.com' | sudo tee -a /etc/hosts
 ```
+
+### Testproject.io
+
+To run testproject tests add the testpoject job to your production-deploy.yaml
+```
+on:
+    ...
+jobs
+  production_deploy:
+    ...
+  testproject:
+    uses: ./.github/workflows/testproject.yaml
+    secrets: inherit
+```
+
+Add 2 additional secrets
+
+* TP_API_KEY = Your testproject.io API key
+* TP_JOB_ID = The job you want to run (you can get this ID from the copy ID link in testproject itself)
