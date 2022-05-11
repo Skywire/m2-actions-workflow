@@ -8,8 +8,8 @@ services:
       - firefox
       - edge
     environment:
-      TP_AGENT_ALIAS: "Persistent Docker Agent"
-      TP_API_KEY: "PKXIDvjUvyO229J5O2zwsgVUmAFkGSUlSonLA9YXEjE1"
+      TP_API_KEY: $TP_API_KEY
+      TP_JOB_ID: $TP_JOB_ID
       CHROME: "chrome:4444"
       FIREFOX: "firefox:4444"
       EDGE: "edge:4444"
