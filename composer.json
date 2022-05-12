@@ -11,7 +11,7 @@
       "vendor/skywire/m2-actions-workflow/.github/workflows/php.yml": ".github/workflows/php.yml!",
       "vendor/skywire/m2-actions-workflow/.github/workflows/static.yml": ".github/workflows/static.yml!",
       "vendor/skywire/m2-actions-workflow/.github/workflows/production-deploy.yml": ".github/workflows/production-deploy.yml!",
-      "vendor/skywire/m2-actions-workflow/.github/workflows/testproject.yml": ".github/workflows/testproject.yml!",
+      "vendor/skywire/m2-actions-workflow/.github/workflows/testproject.yaml": ".github/workflows/testproject.yaml!",
       "vendor/skywire/m2-actions-workflow/.github/workflows/uat.yml": ".github/workflows/uat.yml!",
       "vendor/skywire/m2-actions-workflow/.github/workflows/commit_lint.yml": ".github/workflows/commit_lint.yml!",
       "vendor/skywire/m2-actions-workflow/config/integration/etc/install-config-mysql.php": ".github/workflows/config/integration/etc/install-config-mysql.php!",
