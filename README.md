@@ -95,6 +95,7 @@ jobs
   production_deploy:
     ...
   testproject:
+    needs: [deploy]
     uses: ./.github/workflows/testproject.yaml
     secrets: inherit
 ```
