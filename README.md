@@ -59,6 +59,10 @@ Host mage.hostname
     User www-data
 ```
 
+### CI Specific Composer
+This package provides a CI specific composer.json and composer.lock, composer-ci.json and composer-ci.lock should be copied to your project root.
+If you want to use the same composer for CI and your project uncomment `.github/workflows/production-deploy.yml:46` and comment `.github/workflows/production-deploy.yml:47`
+
 ### OpenVPN
 
 If your destination server requires OpenVPN you will need to place an `openvpn.conf` configuration file and any certificates into `.github/workflows/config/openvpn`

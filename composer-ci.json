@@ -1,0 +1,27 @@
+{
+  "name": "skywire/festive-lights.com-ci",
+  "description": "CI only composer.json",
+  "type": "metapackage",
+  "authors": [
+    {
+      "name": "Skywire Tech team",
+      "email": "tech@skywire.co.uk"
+    }
+  ],
+  "require": {
+    "deployer/deployer": "^7.0",
+    "skywire/deployer-recipes": "^1.5"
+  },
+  "repositories": {
+    "skywire.repo.repman.io": {
+      "type": "composer",
+      "url": "https://skywire.repo.repman.io"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "skywire/file-copy-plugin": true,
+      "cweagans/composer-patches": true
+    }
+  }
+}

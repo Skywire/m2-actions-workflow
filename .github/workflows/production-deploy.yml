@@ -43,7 +43,8 @@ jobs:
                   restore-keys: ${{ runner.os }}-composer-
 
             - name: Composer Install
-              run: composer install --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
+#              run: composer install --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
+              run: COMPOSER=composer-ci.json composer install --no-progress --prefer-dist --optimize-autoloader --ignore-platform-reqs
 
             - name: Deploy
               uses: deployphp/action@v1
