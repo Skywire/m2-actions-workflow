@@ -3,8 +3,7 @@
   "description": "Github actions workflow for Magento 2 projects",
   "type": "library",
   "require": {
-    "skywire/file-copy-plugin": "^1.1",
-    "magento/magento-coding-standard": "*"
+    "skywire/file-copy-plugin": "^1.1"
   },
   "extra": {
     "copy-file": {
