@@ -16,6 +16,8 @@ jobs:
             - name: Setup hosts
               run: sudo echo "${{ secrets.DESTINATION_HOSTNAME }}  ${{ secrets.DEP_HOST_ALIAS }}" | sudo tee -a /etc/hosts
 
+            - name: Update apt
+              run: sudo apt-get update
             - name: Install Open VPN
               run: sudo apt-get install openvpn
             - name: Decode certificate
